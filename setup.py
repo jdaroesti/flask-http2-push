@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 
 
 setup(
@@ -11,7 +11,7 @@ setup(
     author='David Aroesti',
     author_email='david@aroesti.me',
     description="A Flask extension to add http2 server push to your application.",
-    download_url='https://github.com/jdaroesti/flask-http2-push/tarball/' + VERSION,
+    download_url='https://github.com/jdaroesti/flask-http2-push/releases/tag/v' + VERSION,
     long_description=__doc__,
     py_modules=['flask_http2_push'],
     zip_safe=False,

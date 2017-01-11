@@ -1,6 +1,14 @@
 """
 File: flask_http2_push.py
 
+Exposes a decorator `http2push` that can be used on
+Flask's view functions.
+
+    @app.route('/')
+    @http2push()
+    def main():
+        return 'hello, world!'
+
 """
 
 import json
@@ -15,7 +23,23 @@ manifest_cache = dict()  # Stores the constructed link header
 
 
 def http2push(manifest=PUSH_MANIFEST):
-    """ """
+    """
+    Creates the Link header needed in order to use http2 server push
+    to send resources to the clients on first request.
+    This is done, primarily, so new clients can render the app
+    as quickly as possible.
+
+    The spec specifies a header with the following characteristics:
+
+        Link: <https://www.dadant.co/static_file.js>; rel=preload; as=script, ...
+
+    The value will be taken from the instance cache or will be created by
+    reading the `push_manifest.json` file (slow) and storing the value in the
+    cache.
+
+    :param manifest: The path to the push_manifest.json file.
+    :return: The response with the http2 server push headers.
+    """
 
     if not manifest_cache.get(manifest):
         _set_manifest_cache(manifest)
