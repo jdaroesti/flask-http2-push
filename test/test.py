@@ -25,6 +25,11 @@ class FlaskHttp2PushTest(unittest.TestCase):
             def custom_manifest():
                 return ''
 
+            @self.app.route('/multiple-files-manifest')
+            @http2push('test/multiple_files_manifest.json')
+            def multiple_files_manifest():
+                return ''
+
     def test_default_push_manifest(self):
         """
         It should use by default a file called push_manifest.json
@@ -44,4 +49,8 @@ class FlaskHttp2PushTest(unittest.TestCase):
 
     def test_multiple_files_manifest(self):
         """It should create one link header with all the dependencies in it"""
-        self.skipTest('todo')
+
+        response = self.client.get('/multiple-files-manifest')
+        self.assertEqual(response.headers.get('Link'),
+                         '<http://localhost/fonts/some_font.ttf>; rel=preload; as=font,'
+                         '<http://localhost/components/some_component.html>; rel=preload; as=document')

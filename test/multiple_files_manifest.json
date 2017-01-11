@@ -1,0 +1,10 @@
+{
+  "/fonts/some_font.ttf": {
+    "type": "font",
+    "weight": 1
+  },
+  "/components/some_component.html": {
+    "type": "document",
+    "weight": 1
+  }
+}
