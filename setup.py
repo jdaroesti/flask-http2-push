@@ -1,0 +1,32 @@
+from setuptools import setup
+
+VERSION = '0.0.1'
+
+
+setup(
+    name='flask-http2-push',
+    version=VERSION,
+    url='https://github.com/jdaroesti/flask-http2-push',
+    license='MIT',
+    author='David Aroesti',
+    author_email='david@aroesti.me',
+    description="A Flask extension to add http2 server push to your application.",
+    download_url='https://github.com/jdaroesti/flask-http2-push/tarball/' + VERSION,
+    long_description=__doc__,
+    py_modules=['flask_http2_push'],
+    zip_safe=False,
+    include_package_data=True,
+    platforms='any',
+    install_requires=[
+        'Flask'
+    ],
+    classifiers=[
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ]
+)
