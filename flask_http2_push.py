@@ -41,10 +41,25 @@ def http2push(manifest=PUSH_MANIFEST):
     :return: The response with the http2 server push headers.
     """
 
-    if not manifest_cache.get(manifest):
-        _set_manifest_cache(manifest)
+    return _add_link_header(manifest)
 
-    return _add_link_header(manifest_cache[manifest])
+
+def _add_link_header(manifest):
+    def decorator(func):
+
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            if not manifest_cache.get(manifest):
+                _set_manifest_cache(manifest)
+
+            response = flask.make_response(func(*args, **kwargs))
+            response.headers['Link'] = manifest_cache[manifest]
+
+            return response
+
+        return wrapper
+
+    return decorator
 
 
 def _set_manifest_cache(manifest):
@@ -60,15 +75,3 @@ def _set_manifest_cache(manifest):
             type=metadata['type']) for url, metadata in push_urls.iteritems()]
 
         manifest_cache[manifest] = ','.join(link_header_value)
-
-
-def _add_link_header(link_header):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            response = flask.make_response(func(*args, **kwargs))
-            response.headers['Link'] = link_header
-
-            return response
-        return wrapper
-    return decorator
