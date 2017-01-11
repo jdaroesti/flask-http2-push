@@ -16,7 +16,8 @@ manifest_cache = dict()  # Stores the constructed link header
 
 def http2push(manifest=PUSH_MANIFEST):
     """ """
-    if not manifest_cache:
+
+    if not manifest_cache.get(manifest):
         _set_manifest_cache(manifest)
 
     return _add_link_header(manifest_cache[manifest])

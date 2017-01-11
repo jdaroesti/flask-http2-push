@@ -1,5 +1,5 @@
 {
-  "/scripts/push_manifest_example.js": {
+  "/scripts/some_file.js": {
     "type": "script",
     "weight": 1
   }
