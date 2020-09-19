@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/jdaroesti/flask-http2-push.svg?branch=master)](https://travis-ci.org/jdaroesti/flask-http2-push)
 [![pypi](https://img.shields.io/pypi/v/flask-http2-push.svg)](https://pypi.python.org/pypi/flask-http2-push)
 
+**Important**: This repo is no longer mantained.
+
 ***
 
 **Bottom line**: A Flask extension to add HTTP2 server push to your application.
