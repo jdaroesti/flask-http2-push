@@ -15,6 +15,7 @@ import json
 
 import flask
 import functools
+import six
 
 __author__ = 'David Aroesti'
 
@@ -72,6 +73,6 @@ def _set_manifest_cache(manifest):
         link_header_value = ['<{host}{url}>; rel=preload; as={type}'.format(
             host=flask.request.url_root,
             url=url[1:],
-            type=metadata['type']) for url, metadata in push_urls.iteritems()]
+            type=metadata['type']) for url, metadata in six.iteritems(push_urls)]
 
         manifest_cache[manifest] = ','.join(link_header_value)
